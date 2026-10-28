@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Para o Iury ☀️</title>
+  <meta name="description" content="Um pequeno universo feito de música, memórias e carinho.">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Tela de entrada -->
+  <main class="entry-screen" id="entry-screen">
+    <section class="entry-card">
+      <span class="entry-sun" aria-hidden="true">☀️</span>
+
+      <p class="entry-eyebrow">um lugar feito pra ti</p>
+
+      <h1 class="entry-title">Antes de entrar...</h1>
+
+      <p class="entry-message">
+        Tem um lugar que eu fiz pra ti.
+        Mas, antes de entrar, lê tua carta.
+        O resto te espera aqui.
+      </p>
+
+      <form class="entry-form" id="entry-form">
+        <label class="entry-label" for="entry-password">
+          Uma palavrinha pra abrir a porta
+        </label>
+
+        <input
+          class="entry-input"
+          id="entry-password"
+          type="password"
+          placeholder="Nossa palavra secreta..."
+          autocomplete="off"
+          required
+        >
+
+        <p class="entry-error" id="entry-error" hidden>
+          Essa não é a palavrinha certa. Tenta de novo.
+        </p>
+
+        <button class="entry-button" type="submit">
+          entrar no nosso universo ☀️
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Universo de fotografias e palavras -->
+  <main class="memory-world" id="memory-world" hidden>
+    <header class="memory-header">
+      <p class="memory-eyebrow">feito de música, arte e gente</p>
+      <h1 class="memory-title">[ NOSSA FRASE AQUI ]</h1>
+    </header>
+
+    <section
+      class="photo-mosaic"
+      id="photo-mosaic"
+      aria-label="Mosaico de fotografias e memórias"
+    >
+      <!-- As fotografias serão adicionadas pelo JavaScript -->
+    </section>
+
+    <section class="sun-artwork" aria-label="Um sol formado por palavras">
+      <svg
+        class="sun-illustration"
+        id="sun-illustration"
+        viewBox="0 0 600 600"
+        role="img"
+        aria-label="Sol dourado formado por palavras que representam Iury"
+      >
+        <!-- A forma e as palavras do sol serão criadas pelo JavaScript -->
+      </svg>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
