@@ -1,0 +1,57 @@
+
+/* ========================================
+   PARA O IURY ☀️
+   1. Configurações
+======================================== */
+
+// Trocaremos isto pela palavra escolhida para o presente.
+const SECRET_PASSWORD = "tua-palavra-aqui";
+
+/* ========================================
+   2. Elementos da tela
+======================================== */
+
+const entryScreen = document.querySelector("#entry-screen");
+const entryForm = document.querySelector("#entry-form");
+const entryPassword = document.querySelector("#entry-password");
+const entryError = document.querySelector("#entry-error");
+const memoryWorld = document.querySelector("#memory-world");
+
+/* ========================================
+   3. Abertura do universo
+======================================== */
+
+entryForm.addEventListener("submit", function (event) {
+  // Impede o formulário de recarregar a página.
+  event.preventDefault();
+
+  // Compara a senha digitada com a senha definida acima.
+  const typedPassword = entryPassword.value.trim();
+
+  if (typedPassword === SECRET_PASSWORD) {
+    // Esconde a tela de entrada.
+    entryScreen.hidden = true;
+
+    // Revela o universo de memórias.
+    memoryWorld.hidden = false;
+
+    // Leva a página para o início.
+    window.scrollTo(0, 0);
+  } else {
+    // Mostra o aviso de senha incorreta.
+    entryError.hidden = false;
+
+    // Limpa o campo para uma nova tentativa.
+    entryPassword.value = "";
+    entryPassword.focus();
+  }
+});
+
+/* ========================================
+   4. Mensagens de erro
+======================================== */
+
+entryPassword.addEventListener("input", function () {
+  // Esconde o erro assim que ele começar a tentar novamente.
+  entryError.hidden = true;
+});
