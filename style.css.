@@ -319,3 +319,40 @@ input {
     animation-iteration-count: 1 !important;
   }
 }
+
+
+/* SOL TIPOGRÁFICO */
+
+.sun-artwork {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.sun-illustration {
+  display: block;
+  width: min(94vw, 760px);
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 0 24px rgb(232 188 53 / 12%));
+}
+
+.sun-illustration text {
+  paint-order: stroke fill;
+  stroke: #172B38;
+  stroke-width: 0.25px;
+}
+
+.sun-shape {
+  filter: drop-shadow(0 0 10px rgb(232 188 53 / 10%));
+}
+
+@media (max-width: 600px) {
+  .sun-illustration {
+    width: 100vw;
+  }
+}
+
