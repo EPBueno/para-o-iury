@@ -1,15 +1,9 @@
 
-/* ========================================
-   PARA O IURY ☀️
-   1. Configurações
-======================================== */
+/* =========================================
+   1. CONFIGURAÇÕES DA ENTRADA
+========================================= */
 
-// Trocaremos isto pela palavra escolhida para o presente.
 const SECRET_PASSWORD = "tua-palavra-aqui";
-
-/* ========================================
-   2. Elementos da tela
-======================================== */
 
 const entryScreen = document.querySelector("#entry-screen");
 const entryForm = document.querySelector("#entry-form");
@@ -17,41 +11,222 @@ const entryPassword = document.querySelector("#entry-password");
 const entryError = document.querySelector("#entry-error");
 const memoryWorld = document.querySelector("#memory-world");
 
-/* ========================================
-   3. Abertura do universo
-======================================== */
+/* =========================================
+   2. PALETA DO SOL
+========================================= */
+
+const sunColors = [
+  "#E8BC35", // dourado principal
+  "#F3D978", // amarelo suave
+  "#FFF0BC", // creme claro
+  "#C99025", // âmbar
+  "#F3EEE5", // creme
+  "#DCA82D"  // dourado escuro
+];
+
+/* =========================================
+   3. PALAVRAS AVULSAS
+========================================= */
+
+const sunWords = [
+  "Iury", "Sol", "Lagum", "Encontros", "Luz",
+  "Vida", "Alma", "Universo", "Essência", "Arte",
+  "Fotografia", "Laços", "Legado", "Casa",
+  "Memórias", "Sentido", "Alegria", "Cuidado",
+  "Acaso", "irmão loiro", "Carinho", "Conexão",
+  "Destino", "Caminhos", "saudade", "retalhos",
+  "Abrigo", "inspiração"
+];
+
+/* =========================================
+   4. FRASES
+========================================= */
+
+const sunPhrases = [
+  "Eu não te procurava mas ainda bem, que mesmo sem querer eu te encontrei",
+  "Cada palavra me conta mais um segredo seu",
+  "eu vi no seu olho, Um universo de coisas que eu desconheço",
+  "Quem te ensinou a sonhar?",
+  "É fácil não falar de ti, mas como não falar se você tem um pedaço de mim",
+  "A cidade sem você não é igual, e eu também",
+  "É tão bom saber que alguém, que me conhece assim tão bem, existe",
+  "se for pra descobrir o mistério das coisas, que seja com você",
+  "E a vida tão generosa comigo, veio de amigo a amigo, me apresentar a você",
+  "Eu preciso dizer que te amo",
+  "Felicidade é viver na sua companhia",
+  "se for preciso eu pego um barco eu remo por seis meses como peixe, pra te ver",
+  "Tão pra inventar um mar grande o bastante que me assuste e que eu desista de você",
+  "Se for preciso eu crio alguma máquina mais rápida que a dúvida, mais súbita que a lágrima viajo a toda força e num instante de saudade e dor, eu chego pra dizer que eu vim te ver",
+  "Que amor tão grande tem que ser vivido a todo instante",
+  "Mas não importa, a gente inventa a nossa vida... e a vida é boa com você",
+  "Você me explica sua teoria de que a gente se repete vidas e vidas aqui no mundo... e eu acredito em tudo",
+  "Me conta o seu ponto de vista",
+  "Que amor inteiro é o amor de um amigo",
+  "Que maravilha encontrar você aqui",
+  "Quando chega o entardecer, é impossível não lembrar de você",
+  "Pôr do sol vai lembrar você"
+];
+
+/* =========================================
+   5. ABRIR O SITE COM A SENHA
+========================================= */
 
 entryForm.addEventListener("submit", function (event) {
-  // Impede o formulário de recarregar a página.
   event.preventDefault();
 
-  // Compara a senha digitada com a senha definida acima.
   const typedPassword = entryPassword.value.trim();
 
   if (typedPassword === SECRET_PASSWORD) {
-    // Esconde a tela de entrada.
     entryScreen.hidden = true;
-
-    // Revela o universo de memórias.
     memoryWorld.hidden = false;
 
-    // Leva a página para o início.
     window.scrollTo(0, 0);
+    createSun();
   } else {
-    // Mostra o aviso de senha incorreta.
     entryError.hidden = false;
-
-    // Limpa o campo para uma nova tentativa.
     entryPassword.value = "";
     entryPassword.focus();
   }
 });
 
-/* ========================================
-   4. Mensagens de erro
-======================================== */
-
 entryPassword.addEventListener("input", function () {
-  // Esconde o erro assim que ele começar a tentar novamente.
   entryError.hidden = true;
 });
+
+/* =========================================
+   6. CRIAR O SOL TIPOGRÁFICO
+========================================= */
+
+function createSun() {
+  const svg = document.querySelector("#sun-illustration");
+
+  if (!svg || svg.dataset.created === "true") return;
+
+  svg.dataset.created = "true";
+
+  const svgNS = "http://www.w3.org/2000/svg";
+  const centerX = 300;
+  const centerY = 300;
+
+  // A silhueta combina um círculo com raios.
+  const sunShape = document.createElementNS(svgNS, "g");
+  sunShape.setAttribute("class", "sun-shape");
+
+  for (let i = 0; i < 16; i++) {
+    const angle = (Math.PI * 2 * i) / 16;
+    const innerRadius = 174;
+    const outerRadius = i % 2 === 0 ? 265 : 232;
+
+    const x1 = centerX + Math.cos(angle) * innerRadius;
+    const y1 = centerY + Math.sin(angle) * innerRadius;
+    const x2 = centerX + Math.cos(angle) * outerRadius;
+    const y2 = centerY + Math.sin(angle) * outerRadius;
+
+    const ray = document.createElementNS(svgNS, "line");
+    ray.setAttribute("x1", x1);
+    ray.setAttribute("y1", y1);
+    ray.setAttribute("x2", x2);
+    ray.setAttribute("y2", y2);
+    ray.setAttribute("stroke", sunColors[i % sunColors.length]);
+    ray.setAttribute("stroke-width", i % 2 === 0 ? "24" : "17");
+    ray.setAttribute("stroke-linecap", "round");
+    ray.setAttribute("opacity", "0.85");
+
+    sunShape.appendChild(ray);
+  }
+
+  const circle = document.createElementNS(svgNS, "circle");
+  circle.setAttribute("cx", centerX);
+  circle.setAttribute("cy", centerY);
+  circle.setAttribute("r", "180");
+  circle.setAttribute("fill", "#172B38");
+  circle.setAttribute("fill-opacity", "0.94");
+
+  sunShape.appendChild(circle);
+  svg.appendChild(sunShape);
+
+  // Gera uma sequência estável de posições.
+  // Assim, o sol não muda de lugar a cada abertura.
+  let seed = 4640;
+
+  function random() {
+    seed = (seed * 16807) % 2147483647;
+    return (seed - 1) / 2147483646;
+  }
+
+  // Distribui as palavras pelo círculo e pelos raios.
+  const allWords = [
+    ...sunWords,
+    ...sunWords.filter(word =>
+      ["Iury", "Sol", "Luz", "Vida", "Arte"].includes(word)
+    )
+  ];
+
+  allWords.forEach((word, index) => {
+    const angle = random() * Math.PI * 2;
+    const radius = Math.sqrt(random()) * 250;
+
+    const x = centerX + Math.cos(angle) * radius;
+    const y = centerY + Math.sin(angle) * radius;
+
+    const text = document.createElementNS(svgNS, "text");
+    text.textContent = word;
+    text.setAttribute("x", x);
+    text.setAttribute("y", y);
+    text.setAttribute("fill", sunColors[index % sunColors.length]);
+    text.setAttribute("font-family", "Georgia, serif");
+    text.setAttribute("font-size",
+      word === "Iury" ? 24 :
+      word === "Sol" ? 22 :
+      12 + random() * 9
+    );
+    text.setAttribute("font-weight",
+      random() > 0.55 ? "bold" : "normal"
+    );
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("opacity", 0.78 + random() * 0.22);
+
+    const rotation = Math.round((random() - 0.5) * 36);
+    text.setAttribute(
+      "transform",
+      `rotate(${rotation} ${x} ${y})`
+    );
+
+    svg.appendChild(text);
+  });
+
+  // As frases aparecem em linhas curvas horizontais,
+  // priorizando a leitura em vez de girar tudo aleatoriamente.
+  const phraseRows = [
+    { y: 208, width: 245 },
+    { y: 232, width: 300 },
+    { y: 256, width: 325 },
+    { y: 280, width: 345 },
+    { y: 304, width: 350 },
+    { y: 328, width: 345 },
+    { y: 352, width: 325 },
+    { y: 376, width: 300 },
+    { y: 400, width: 245 }
+  ];
+
+  sunPhrases.forEach((phrase, index) => {
+    const row = phraseRows[index % phraseRows.length];
+
+    const text = document.createElementNS(svgNS, "text");
+    text.textContent = phrase;
+    text.setAttribute("x", centerX);
+    text.setAttribute("y", row.y);
+    text.setAttribute("fill", sunColors[(index + 1) % sunColors.length]);
+    text.setAttribute("font-family", "Arial, Helvetica, sans-serif");
+    text.setAttribute("font-size", phrase.length > 95 ? "7" :
+      phrase.length > 65 ? "8" : "10");
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("opacity", "0.95");
+
+    // Reduz o texto para caber na largura da linha.
+    text.setAttribute("textLength", row.width);
+    text.setAttribute("lengthAdjust", "spacingAndGlyphs");
+
+    svg.appendChild(text);
+  });
+}
