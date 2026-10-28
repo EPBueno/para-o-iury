@@ -1,0 +1,321 @@
+
+/* ========================================
+   PARA O IURY ☀️
+   1. Cores e configurações gerais
+======================================== */
+
+:root {
+  --color-night: #172B38;
+  --color-deep-blue: #233B4A;
+  --color-gold: #E8BC35;
+  --color-amber: #C99025;
+  --color-cream: #F3EEE5;
+  --color-muted: #C9C4B9;
+
+  --font-main: Georgia, "Times New Roman", serif;
+  --font-detail: Arial, Helvetica, sans-serif;
+}
+
+/* ========================================
+   2. Configurações básicas
+======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--color-night);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--color-cream);
+  font-family: var(--font-detail);
+  background: var(--color-night);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+/* ========================================
+   3. Tela de entrada
+======================================== */
+
+.entry-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(232, 188, 53, 0.10),
+      transparent 42%
+    ),
+    var(--color-night);
+}
+
+.entry-card {
+  width: min(100%, 460px);
+  padding: 48px 32px;
+  text-align: center;
+  border: 1px solid rgba(243, 238, 229, 0.16);
+  border-radius: 4px;
+  background: rgba(35, 59, 74, 0.76);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+}
+
+.entry-sun {
+  display: block;
+  margin-bottom: 24px;
+  font-size: 42px;
+}
+
+.entry-eyebrow,
+.memory-eyebrow {
+  color: var(--color-gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.entry-title {
+  margin: 18px 0;
+  font-family: var(--font-main);
+  font-size: clamp(30px, 7vw, 42px);
+  font-weight: 400;
+}
+
+.entry-message {
+  max-width: 310px;
+  margin: 0 auto 32px;
+  color: var(--color-muted);
+  font-family: var(--font-main);
+  font-size: 17px;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.entry-form {
+  display: grid;
+  gap: 14px;
+}
+
+.entry-label {
+  color: var(--color-cream);
+  font-size: 12px;
+}
+
+.entry-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid rgba(243, 238, 229, 0.25);
+  border-radius: 3px;
+  outline: none;
+  color: var(--color-cream);
+  background: rgba(23, 43, 56, 0.8);
+  text-align: center;
+}
+
+.entry-input::placeholder {
+  color: #9EA8AC;
+}
+
+.entry-input:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(232, 188, 53, 0.12);
+}
+
+.entry-button {
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 3px;
+  color: var(--color-night);
+  background: var(--color-gold);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.entry-button:hover {
+  background: #F3D36C;
+  transform: translateY(-2px);
+}
+
+.entry-button:focus-visible {
+  outline: 2px solid var(--color-cream);
+  outline-offset: 4px;
+}
+
+.entry-error {
+  margin: 0;
+  color: #F3A49A;
+  font-size: 12px;
+}
+
+/* ========================================
+   4. Universo de fotografias
+======================================== */
+
+.memory-world {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--color-night);
+}
+
+.memory-header {
+  position: relative;
+  z-index: 3;
+  padding: 48px 20px 28px;
+  text-align: center;
+}
+
+.memory-title {
+  margin: 16px auto 0;
+  font-family: var(--font-main);
+  font-size: clamp(25px, 5vw, 48px);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+/* ========================================
+   5. Mosaico de fotografias
+======================================== */
+
+.photo-mosaic {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-auto-rows: clamp(70px, 10vw, 130px);
+  gap: 4px;
+  overflow: hidden;
+  opacity: 0.58;
+}
+
+.photo-tile {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--color-deep-blue);
+}
+
+.photo-tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.78);
+  transition:
+    transform 350ms ease,
+    filter 350ms ease;
+}
+
+.photo-tile:hover img,
+.photo-tile:focus-visible img,
+.photo-tile.is-active img {
+  transform: scale(1.09);
+  filter: saturate(1.1) brightness(1.12);
+}
+
+.photo-tile:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: -2px;
+}
+
+.photo-mosaic::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(23, 43, 56, 0.48),
+    rgba(23, 43, 56, 0.18) 50%,
+    rgba(23, 43, 56, 0.62)
+  );
+  content: "";
+  pointer-events: none;
+}
+
+/* ========================================
+   6. Sol tipográfico
+======================================== */
+
+.sun-artwork {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: min(90vw, 680px);
+  margin: 0 auto;
+  padding: 10px 0 60px;
+  place-items: center;
+  pointer-events: none;
+}
+
+.sun-illustration {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 0.24));
+}
+
+/* ========================================
+   7. Adaptação para celulares
+======================================== */
+
+@media (max-width: 600px) {
+  .entry-card {
+    padding: 38px 22px;
+  }
+
+  .memory-header {
+    padding-top: 34px;
+  }
+
+  .photo-mosaic {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-auto-rows: 84px;
+    gap: 3px;
+  }
+
+  .sun-artwork {
+    width: 96vw;
+    padding-top: 24px;
+  }
+}
+
+/* ========================================
+   8. Respeitar quem prefere menos animação
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
